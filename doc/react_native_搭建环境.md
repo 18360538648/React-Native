@@ -54,6 +54,13 @@ class HelloWorldApp extends Component {
 AppRegistry.registerComponent('HelloWorld', () => HelloWorldApp);
 ```
 
+## 7.版本跟新
+
+React-native现在很不稳定，基本上是每两周就更新一次，已有代码库更新的步骤如下
+
+
+* npm install。(当提示‘require react@某.某.某版本, but none was installed’，然后根据这样的提示，执行npm install react@某.某.某版本 --save)
+* react-native upgrade（更新动态生成的文件）
 ## 7.遇到的问题
 
 
@@ -67,6 +74,12 @@ react-native start
 ### 7.2 界面显示:Could not get BatchedBridge,make sure your bundle is packaged correctly
 
 解决方案：使劲摇晃手机 在出来的菜单里选择“Dev Settings”，然后点击最下面的“Debug server host & port for device“，然后填入你电脑的ip:8081必须是你的手机和你的电脑在同一个局域网内才可以。设置完成以后再重启应用 你就可以看到Reac Native的欢迎界面了，就是index.android.js页面的内容
+
+### 7.2 更新以后遇到Cannot find module 'invariant'
+
+```
+npm install invariant warning --save
+```
 
 
 ## 小米手机装不上
