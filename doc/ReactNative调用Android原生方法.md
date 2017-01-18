@@ -80,7 +80,7 @@ rnToastAndroid.getPackageName();
 
 ## 4. 获取android返回值(在失败时返回值有问题，需进一步调整)
 
-提供给js调用的原生android方法的返回类型必须是void，React Native的跨语言访问是异步进行的，所以想要给JavaScript返回一个值的唯一办法是使用回调函数或者发送事件
+重点：提供给js调用的原生android方法的返回类型必须是void，React Native的跨语言访问是异步进行的，所以想要给JavaScript返回一个值的唯一办法是使用回调函数或者发送事件
 
 ### 4.1 回调函数
 

@@ -59,7 +59,7 @@ AppRegistry.registerComponent('HelloWorld', () => HelloWorldApp);
 React-native现在很不稳定，基本上是每两周就更新一次，已有代码库更新的步骤如下
 
 
-* npm install。(当提示‘require react@某.某.某版本, but none was installed’，然后根据这样的提示，执行npm install react@某.某.某版本 --save)
+* 打开项目目录下的package.json文件，然后在dependencies模块下找到react-native，将当前版本号改到最新，然后在命令行中运行npm install。(当提示‘require react@某.某.某版本, but none was installed’，然后根据这样的提示，执行npm install react@某.某.某版本 --save)
 * react-native upgrade（更新动态生成的文件）
 ## 7.遇到的问题
 
@@ -75,11 +75,26 @@ react-native start
 
 解决方案：使劲摇晃手机 在出来的菜单里选择“Dev Settings”，然后点击最下面的“Debug server host & port for device“，然后填入你电脑的ip:8081必须是你的手机和你的电脑在同一个局域网内才可以。设置完成以后再重启应用 你就可以看到Reac Native的欢迎界面了，就是index.android.js页面的内容
 
-### 7.2 更新以后遇到Cannot find module 'invariant'
+### 7.3 更新以后遇到Cannot find module 'invariant'
 
 ```
 npm install invariant warning --save
 ```
+### 7.4 Building and installing the app on the device (cd android && ./gradlew installDebug...Could not install the app on the device, read the error above for details.Make sure you have an Android emulator running or a device connected and have
+
+这是由gradlew无权限的原因，到工程目录下面，运行下面一句话即可解决
+
+```
+chmod 755 android/gradlew
+```
+
+### 7.5 修改android包名以后，无法找到Mainactivity，导致应用无法自启
+
+这是由于rn中自启android是根据build.gradle目录下面的defaultConfig中的applicationId来启动的，由于更改包名以后，applicationId没有自动更改，导致根据老包名无法启动，只要将applicationId更改为新包名即可
+
+### 7.6 but only one callback may be registered to a function in a native module
+
+这是由于在一个事件中连续发送了两次callback导致的
 
 
 ## 小米手机装不上
