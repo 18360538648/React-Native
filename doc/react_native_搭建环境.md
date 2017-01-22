@@ -1,10 +1,10 @@
-#React Native 搭建环境
+#React Native 搭建环境（Mac系统）
 
-## 1.安装Node.js
+## 1. 安装Node.js
 ```
 brew install node
 ```
-## 2.安装React Native的命令行工具
+## 2. 安装React Native的命令行工具
 ```
 npm install -g react-native-cli
 ```
@@ -13,19 +13,19 @@ npm install -g react-native-cli
 ```
 sudo chown -R `whoami` /usr/local
 ```
-## 3.安装Nuclide
+## 3. 安装Nuclide
 
 是由Facebook提供的基于atom的集成开发环境，可用于编写、运行和 调试React Native应用
 
 ```
 apm install nuclide
 ```
-## 4.建立React Native工程
+## 4. 建立React Native工程
 
 ```
 react-native init HelloWorld
 ```
-## 5.运行工程
+## 5. 运行工程
 
 ```
 cd HelloWorld //进入创建的工程目录
@@ -33,7 +33,7 @@ react-native run-ios(android) //在ios或Android中运行手机
 
 ```
 
-## 6.编写Hello World
+## 6. 编写Hello World
 
 使用如下代码，覆盖index.ios.js或是index.android.js中的代码
 
@@ -54,13 +54,7 @@ class HelloWorldApp extends Component {
 AppRegistry.registerComponent('HelloWorld', () => HelloWorldApp);
 ```
 
-## 7.版本跟新
 
-React-native现在很不稳定，基本上是每两周就更新一次，已有代码库更新的步骤如下
-
-
-* 打开项目目录下的package.json文件，然后在dependencies模块下找到react-native，将当前版本号改到最新，然后在命令行中运行npm install。(当提示‘require react@某.某.某版本, but none was installed’，然后根据这样的提示，执行npm install react@某.某.某版本 --save)
-* react-native upgrade（更新动态生成的文件）
 ## 7.遇到的问题
 
 
@@ -96,6 +90,13 @@ chmod 755 android/gradlew
 
 这是由于在一个事件中连续发送了两次callback导致的
 
+## 8. 版本跟新
+
+React-native现在很不稳定，基本上是每两周就更新一次，已有代码库更新的步骤如下
+
+
+* 打开项目目录下的package.json文件，然后在dependencies模块下找到react-native，将当前版本号改到最新，然后在命令行中运行npm install。(当提示‘require react@某.某.某版本, but none was installed’，然后根据这样的提示，执行npm install react@某.某.某版本 --save)
+* react-native upgrade（更新动态生成的文件）
 
 ## 小米手机装不上
 

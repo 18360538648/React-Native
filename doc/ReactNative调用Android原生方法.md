@@ -78,7 +78,7 @@ var rnToastAndroid = NativeModules.ToastByAndroid;
 rnToastAndroid.getPackageName();
 ```
 
-## 4. 获取android返回值(在失败时返回值有问题，需进一步调整)
+## 4. 获取android返回值
 
 重点：提供给js调用的原生android方法的返回类型必须是void，React Native的跨语言访问是异步进行的，所以想要给JavaScript返回一个值的唯一办法是使用回调函数或者发送事件
 
@@ -93,13 +93,9 @@ rnToastAndroid.getPackageName();
   @ReactMethod
   public void tryCallBack(String name,String psw,Callback errorCallback,Callback successCallback){
     try{
-      if(TextUtils.isEmpty(name)){
+      if(TextUtils.isEmpty(name)&&TextUtils.isEmpty(psw)){
         // 失败时回调
-        errorCallback.invoke("user name is empty");
-      }
-      if(TextUtils.isEmpty(psw)){
-        // 失败时回调
-        errorCallback.invoke("psw name is empty");
+        errorCallback.invoke("user or psw  is empty");
       }
       // 成功时回调
       successCallback.invoke("add user success");
@@ -113,7 +109,7 @@ rnToastAndroid.getPackageName();
 ```
 // RN端调用代码
 var rnToastAndroid = NativeModules.ToastByAndroid;
-rnToastAndroid.tryCallBack("luo","131",(errorMsg1)=>{alert(errorMsg1)},(msg)=>{alert(msg);});
+rnToastAndroid.tryCallBack("luo","131",(errorCallback)=>{alert(errorCallback)},(successCallback)=>{alert(successCallback);});
 ```
 
 #### 4.1.2 Promises
@@ -125,11 +121,8 @@ rnToastAndroid.tryCallBack("luo","131",(errorMsg1)=>{alert(errorMsg1)},(msg)=>{a
 @ReactMethod
   public void tryPromise(String name, String psw, Promise promise){
     try{
-      if(TextUtils.isEmpty(name)){
-        promise.reject("0","user name is empty");
-      }
-      if(TextUtils.isEmpty(psw)){
-         promise.reject("1","pwd is empty");
+      if(TextUtils.isEmpty(name)&&TextUtils.isEmpty(psw)){
+        promise.reject("0","user name  or psw is empty");
       }
       WritableMap map = Arguments.createMap();
       map.putString("user_id", "success");
@@ -148,4 +141,45 @@ rnToastAndroid.tryPromise('luo', '131').then((map)=> {
 });
 ```
 
+## 5 android主动向rn发送消息
 
+## 5.1 android端代码
+
+reactContext(可以想办法到1. 创建一个原生模块中获得)
+
+```
+public  static void sendEvent(ReactContext reactContext, String eventName, int status)
+    {
+        System.out.println("reactContext="+reactContext);
+
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName,status);
+    }
+```
+
+## 5.2 Rn端代码
+
+```
+// eventName为5.1中的eventName，reminder为5.1中的status
+DeviceEventEmitter.addListener(eventName, (reminder) => {
+      console.log(reminder):
+    });
+```
+
+## rn调用android模版
+```
+
+const RNBridgeModule = NativeModules.RNBridgeModule;
+nativeLanuchApp(message) {
+    RNBridgeModule.nativePlayVideo(message);
+  }
+
+  <TouchableOpacity onPress={() => {
+							this.nativeLanuchApp("111");
+						}} >
+      <Text >
+        try
+      </Text>
+    </TouchableOpacity>
+```
