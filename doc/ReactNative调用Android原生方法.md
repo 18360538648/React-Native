@@ -169,7 +169,9 @@ DeviceEventEmitter.addListener(eventName, (reminder) => {
 
 ## rn调用android模版
 ```
-
+RNBridgeModule.nativeLessonMsg("app4", (response) => {
+			alert(response);
+		});
 const RNBridgeModule = NativeModules.RNBridgeModule;
 nativeLanuchApp(message) {
     RNBridgeModule.nativePlayVideo(message);
@@ -178,8 +180,13 @@ nativeLanuchApp(message) {
   <TouchableOpacity onPress={() => {
 							this.nativeLanuchApp("111");
 						}} >
-      <Text >
+      <Text style={{marginTop:20}}>
         try
       </Text>
     </TouchableOpacity>
+```
+
+```
+RNBridgeModule.nativeLessonLearn("{"id": "12345","seq": [{"type": "video","url": "http://st.5vcdn.com/ubcoll/video.mp4"}, {"type": "web_bundle","url": "http://st.5vcdn.com/tmp/app3.zip","vc": "2","app_id": "app3","orientation": "portrait"}, {"type": "web_bundle","url": "http://st.5vcdn.com/tmp/app2.zip","vc": "2","app_id": "app2","orientation": "landscape"}]}");
+	}
 ```

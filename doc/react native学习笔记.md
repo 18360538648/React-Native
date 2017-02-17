@@ -214,3 +214,51 @@ import {
   TouchableOpacity
 } from 'react-native';
 ```
+
+
+## rn 搜索框
+
+```
+<View style={this.props.StylesDefault.searchcontainer}>
+				<View style={this.props.StylesDefault.searchBox}>
+				<Icon style={this.props.StylesDefault.searchIcon} name = 'search' size={18} color='#b7b7b7' />
+        <TextInput style={this.props.StylesDefault.inputText}
+				keyboardType='web-search'
+				underlineColorAndroid='transparent'
+        placeholder='Search' />
+				</View>
+				</View>
+```
+
+```
+searchBox:{//搜索框
+      height:30,
+      flexDirection: 'row',   // 水平排布
+      flex:1,
+      borderRadius: 15,  // 设置圆角边
+      backgroundColor: 'white',
+      alignItems: 'center',
+      marginLeft: 8,
+      marginRight: 8,
+    },
+    searchIcon: {//搜索图标
+        height: 20,
+        width: 20,
+        marginLeft: 5,
+    },
+    inputText:{
+			flex:1,
+      backgroundColor:'transparent',
+      fontSize:16,
+			paddingTop:4,
+			paddingBottom: 4,
+    },
+		}),
+  searchcontainer: {
+				flexDirection: 'row',   // 水平排布
+				paddingTop:5,
+				paddingBottom:5,
+        backgroundColor: '#e0e0e0',
+        alignItems: 'center'  // 使元素垂直居中排布, 当flexDirection为column时, 为水平居中
+    },
+```
